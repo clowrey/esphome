@@ -288,15 +288,15 @@ void ILI9341M5Stack::initialize() {
 //   24_TFT display
 void ILI9341TFT24::initialize() {
   this->init_lcd_(INITCMD_TFT);
-  this->width_ = 240;
-  this->height_ = 320;
+  this->width_ = 320;
+  this->height_ = 480;
 }
 
 //   24_TFT rotated display
 void ILI9341TFT24R::initialize() {
   this->init_lcd_(INITCMD_TFT);
-  this->width_ = 320;
-  this->height_ = 240;
+  this->width_ = 480;
+  this->height_ = 320;
 }
 
 }  // namespace ili9341
