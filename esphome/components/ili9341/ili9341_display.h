@@ -73,8 +73,8 @@ class ILI9341Display : public PollingComponent,
   void rotate_my_(uint8_t m);
 
   ILI9341Model model_;
-  int16_t width_{320};   ///< Display width as modified by current rotation
-  int16_t height_{240};  ///< Display height as modified by current rotation
+  int16_t width_{480};   ///< Display width as modified by current rotation
+  int16_t height_{320};  ///< Display height as modified by current rotation
   uint16_t x_low_{0};
   uint16_t y_low_{0};
   uint16_t x_high_{0};
