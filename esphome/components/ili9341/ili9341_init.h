@@ -35,6 +35,7 @@ static const uint8_t PROGMEM INITCMD_M5STACK[] = {
   0x00                                   // End of list
 };
 
+  /*
 static const uint8_t PROGMEM INITCMD_TFT[] = {
   0x01, 0, 
   0x11, 0,
@@ -57,8 +58,8 @@ static const uint8_t PROGMEM INITCMD_TFT[] = {
     
   0x00 // End of list
 };  
-  
-/*
+  */
+
 static const uint8_t PROGMEM INITCMD_TFT[] = {
   0xEF, 3, 0x03, 0x80, 0x02,
   0xCF, 3, 0x00, 0xC1, 0x30,
@@ -88,7 +89,7 @@ static const uint8_t PROGMEM INITCMD_TFT[] = {
   ILI9341_DISPON  , 0x80,                // Display on
   0x00                                   // End of list
 };
-*/
+
   
 // clang-format on
 }  // namespace ili9341
