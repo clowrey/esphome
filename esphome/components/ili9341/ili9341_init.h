@@ -36,7 +36,8 @@ static const uint8_t PROGMEM INITCMD_M5STACK[] = {
 };
 
 static const uint8_t PROGMEM INITCMD_TFT[] = {
-
+  0x01, 0, 
+  0x11, 0,
   0xF0, 1, 0xC3,
   0xF0, 1, 0x96,
   0x36, 1, 0x48,
