@@ -53,7 +53,7 @@ static const uint8_t PROGMEM INITCMD_TFT[] = {
   0xF0, 1, 0x3C,
   0xF0, 1, 0x69,
    
-  0x29,  //display on
+  0x29, 0,  //display on
     
   0x00 // End of list
 };  
