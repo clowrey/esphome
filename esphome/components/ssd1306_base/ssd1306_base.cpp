@@ -138,6 +138,9 @@ void SSD1306::setup() {
   set_contrast(this->contrast_);
   if (this->is_ssd1305_())
     set_brightness(this->brightness_);
+  
+  command(0xAD); //iref
+  command(0x30); //set to internal ref @240uA
 
   this->fill(Color::BLACK);  // clear display - ensures we do not see garbage at power-on
   this->display();           // ...write buffer, which actually clears the display's memory
