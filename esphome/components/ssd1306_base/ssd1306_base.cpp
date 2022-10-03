@@ -226,7 +226,7 @@ int SSD1306::get_height_internal() {
     case SSD1306_MODEL_64_48:
     case SH1106_MODEL_64_48:
       return 48;
-    case SSD1306_MODEL_72x40:
+    case SSD1306_MODEL_72_40:
       return 40;
     default:
       return 0;
@@ -314,7 +314,7 @@ const char *SSD1306::model_str_() {
     case SSD1305_MODEL_128_64:
       return "SSD1305 128x64";
     case SSD1306_MODEL_72_40:
-      return "SSD1305 72x40";
+      return "SSD1306 72x40";
     default:
       return "Unknown";
   }
