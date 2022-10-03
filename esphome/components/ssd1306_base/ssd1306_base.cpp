@@ -153,6 +153,7 @@ void SSD1306::display() {
   this->command(SSD1306_COMMAND_COLUMN_ADDRESS);
   switch (this->model_) {
     case SSD1306_MODEL_64_48:
+    case SSD1306_MODEL_72_40:
     case SSD1306_MODEL_64_32:
       this->command(0x20 + this->offset_x_);
       this->command(0x20 + this->offset_x_ + this->get_width_internal() - 1);
