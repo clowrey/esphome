@@ -96,6 +96,7 @@ void SSD1306::setup() {
     case SH1106_MODEL_128_64:
     case SSD1306_MODEL_64_48:
     case SSD1306_MODEL_64_32:
+    case SSD1306_MODEL_72_40:
     case SH1106_MODEL_64_48:
     case SH1107_MODEL_128_64:
     case SSD1305_MODEL_128_32:
@@ -137,6 +138,9 @@ void SSD1306::setup() {
   set_contrast(this->contrast_);
   if (this->is_ssd1305_())
     set_brightness(this->brightness_);
+  
+  command(0xAD); //iref
+  command(0x30); //set to internal ref @240uA
 
   this->fill(Color::BLACK);  // clear display - ensures we do not see garbage at power-on
   this->display();           // ...write buffer, which actually clears the display's memory
@@ -151,6 +155,10 @@ void SSD1306::display() {
 
   this->command(SSD1306_COMMAND_COLUMN_ADDRESS);
   switch (this->model_) {
+    case SSD1306_MODEL_72_40:
+      this->command(0x1C + this->offset_x_);
+      this->command(0x1C + this->offset_x_ + this->get_width_internal() - 1);
+      break;
     case SSD1306_MODEL_64_48:
     case SSD1306_MODEL_64_32:
       this->command(0x20 + this->offset_x_);
@@ -225,6 +233,8 @@ int SSD1306::get_height_internal() {
     case SSD1306_MODEL_64_48:
     case SH1106_MODEL_64_48:
       return 48;
+    case SSD1306_MODEL_72_40:
+      return 40;
     default:
       return 0;
   }
@@ -241,6 +251,8 @@ int SSD1306::get_width_internal() {
     case SSD1306_MODEL_96_16:
     case SH1106_MODEL_96_16:
       return 96;
+    case SSD1306_MODEL_72_40:
+      return 72;
     case SSD1306_MODEL_64_48:
     case SSD1306_MODEL_64_32:
     case SH1106_MODEL_64_48:
@@ -308,6 +320,8 @@ const char *SSD1306::model_str_() {
       return "SSD1305 128x32";
     case SSD1305_MODEL_128_64:
       return "SSD1305 128x64";
+    case SSD1306_MODEL_72_40:
+      return "SSD1306 72x40";
     default:
       return "Unknown";
   }

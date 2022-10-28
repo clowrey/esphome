@@ -117,6 +117,7 @@ CONFIG_SCHEMA = cv.All(
             cv.Optional(CONF_ON_SHUTDOWN): automation.validate_automation(
                 {
                     cv.GenerateID(CONF_TRIGGER_ID): cv.declare_id(ShutdownTrigger),
+                    cv.Optional(CONF_PRIORITY, default=600.0): cv.float_,
                 }
             ),
             cv.Optional(CONF_ON_LOOP): automation.validate_automation(
@@ -178,7 +179,11 @@ def preload_core_config(config, result):
     ]
 
     if not has_oldstyle and not newstyle_found:
-        raise cv.Invalid("Platform missing for core options!", [CONF_ESPHOME])
+        raise cv.Invalid(
+            "Platform missing. You must include one of the available platform keys: "
+            + ", ".join(TARGET_PLATFORMS),
+            [CONF_ESPHOME],
+        )
     if has_oldstyle and newstyle_found:
         raise cv.Invalid(
             f"Please remove the `platform` key from the [esphome] block. You're already using the new style with the [{conf[CONF_PLATFORM]}] block",
@@ -291,7 +296,7 @@ async def _add_automations(config):
         await automation.build_automation(trigger, [], conf)
 
     for conf in config.get(CONF_ON_SHUTDOWN, []):
-        trigger = cg.new_Pvariable(conf[CONF_TRIGGER_ID])
+        trigger = cg.new_Pvariable(conf[CONF_TRIGGER_ID], conf.get(CONF_PRIORITY))
         await cg.register_component(trigger, conf)
         await automation.build_automation(trigger, [], conf)
 
